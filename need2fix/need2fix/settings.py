@@ -149,6 +149,8 @@ USE_TZ = True
 
 LOGIN_URL = '/need2fix/oauth/login/tu/'
 
+FORCE_SCRIPT_NAME = '/need2fix'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
