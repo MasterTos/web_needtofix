@@ -4,7 +4,8 @@ services:
   db_needtofix:
     container_name: postgres_needtofix
     image: postgres:alpine
-    # build: ./postgresql
+    networks:
+      - internal
     restart: always
 
   web_needtofix:
@@ -15,6 +16,8 @@ services:
       - ./need2fix:/code
       - /var/www/need/static/
       - /var/www/need/media/
+    networks:
+      - internal
     depends_on:
       - db_needtofix
 
@@ -27,6 +30,9 @@ services:
         - ./nginx/:/etc/nginx/conf.d/
       volumes_from:
         - web_needtofix
+      networks:
+        - internal
+        - proxy
       depends_on:
         - web_needtofix
 
