@@ -25,7 +25,7 @@ SECRET_KEY = '*ydm@ozmr*x12395z%&-c1-g!(onmw!wbhgt%52k-ndmeew%ta'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['web2','localhost']
+ALLOWED_HOSTS = ['web2','localhost', '*']
 
 
 # Application definition
@@ -128,8 +128,8 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.associate_by_email',
 ]
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/need2fix/'
+LOGOUT_REDIRECT_URL = '/need2fix/'
 
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'need2fix.drf_utils.exception_handler'
@@ -147,17 +147,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = '/oauth/login/tu/'
+LOGIN_URL = '/need2fix/oauth/login/tu/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/need2fix/static/'
 STATIC_ROOT = '/var/www/need/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     
 ]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/need2fix/media/'
 MEDIA_ROOT = '/var/www/need/media/'
