@@ -3,7 +3,7 @@ version: '2'
 services:
   db_needtofix:
     container_name: postgres_needtofix
-    image: postgres
+    image: postgres:alpine
     # build: ./postgresql
     restart: always
 
@@ -20,7 +20,7 @@ services:
 
   nginx_needtofix:
       container_name: nginx_needtofix
-      image: nginx:latest
+      image: nginx:alpine
       ports:
         - "80:80"
       volumes:
