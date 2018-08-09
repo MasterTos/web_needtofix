@@ -69,14 +69,14 @@ var content = new Vue({
   },
 
   mounted: function () {
-    axios.get('/api/task/')
+    axios.get('/need2fix/api/task/')
       .then((response) => {
         this.taskList = response.data
       })
       .catch((error) => {
         alert(error)
       })
-    axios.get('/api/division-list/')
+    axios.get('/need2fix/api/division-list/')
       .then((response) => {
         this.divisionList = response.data
       })

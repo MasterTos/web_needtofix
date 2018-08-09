@@ -86,21 +86,21 @@ var content = new Vue({
   },
 
   mounted: function () {
-    axios.get('/api/division-list/')
+    axios.get('/need2fix/api/division-list/')
       .then((response) => {
         this.divisionList = response.data
       })
       .catch((error) => {
         alert(error)
       })    
-    axios.get('/api/mechanic-list/')
+    axios.get('/need2fix/api/mechanic-list/')
       .then((response) => {
         this.mechanicList = response.data
       })
       .catch((error) => {
         alert(error)
       })
-    axios.get('/api/task/'+'{{pk}}/')
+    axios.get('/need2fix/api/task/'+'{{pk}}/')
       .then((response) => {
         this.formData = response.data
         formData = response.data
@@ -116,7 +116,7 @@ var content = new Vue({
         
         console.log(this.formData)
         
-        axios.patch('/api/task/'+'{{pk}}/', {
+        axios.patch('/need2fix/api/task/'+'{{pk}}/', {
                 'status': this.formData.status,
                 'operator': this.formData.operator,
             })

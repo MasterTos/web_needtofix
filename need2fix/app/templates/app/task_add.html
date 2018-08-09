@@ -72,11 +72,11 @@ new Vue({
   delimiters: ['[[', ']]'],
 
   mounted () {
-    axios.get('/api/building-info')
+    axios.get('/need2fix/api/building-info')
       .then((res) => {
         this.buildingInfo = res.data
       })
-    axios.get('/api/division-list')
+    axios.get('/need2fix/api/division-list')
       .then((res) => {
         this.divisionList = res.data
         this.divisionList[null] = "ไม่ระบุ"
@@ -141,7 +141,7 @@ new Vue({
         formData.set('image', this.imageFile)
       } 
 
-      axios.post('/api/task/', formData)
+      axios.post('/need2fix/api/task/', formData)
         .then((res) => {
           alert('ส่งคำร้องเรียบร้อย')
           window.location = "/task/list";
