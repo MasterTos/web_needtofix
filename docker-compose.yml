@@ -29,3 +29,9 @@ services:
         - web_needtofix
       depends_on:
         - web_needtofix
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
