@@ -6,6 +6,8 @@ services:
     image: postgres:alpine
     networks:
       - internal
+    labels:
+      - traefik.enable=false
     restart: always
 
   web_needtofix:
@@ -18,6 +20,8 @@ services:
       - /var/www/need/media/
     networks:
       - internal
+    labels:
+      - traefik.enable=false
     depends_on:
       - db_needtofix
 
@@ -33,6 +37,13 @@ services:
       networks:
         - internal
         - proxy
+      labels:
+        - traefik.enable=true
+        - traefik.backend=nginx_needtofix
+        - traefik.frontend.passHostHeader=true
+        - "traefik.frontend.rule=Host:service.sci.tu.ac.th;PathPrefixStrip:/need2fix"
+        - traefik.docker.network:proxy
+        - traefik.port=80
       depends_on:
         - web_needtofix
 
