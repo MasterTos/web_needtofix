@@ -1,31 +1,68 @@
 version: '2'
 
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
+
 services:
   db_needtofix:
     container_name: postgres_needtofix
-    image: postgres
+    image: postgres:alpine
     # build: ./postgresql
     restart: always
+    labels:
+      - traefik.enable=false
+    networks:
+      - internal
+    volumes:
+      - /home/kubelab/data/need2fix_data:/var/lib/postgresql/data
 
   web_needtofix:
     container_name: web_needtofix
     build: ./need2fix
-    command: sh /code/run.sh
+    command: sh /code/run2.sh
     volumes:
       - ./need2fix:/code
-      - /var/www/need/static/:/var/www/need/static/
-      - /var/www/need/media/:/var/www/need/media/
+#      - /usr/share/nginx/html/static/
+#      - /usr/share/nginx/html/media/
+    networks:
+      - internal
+      - proxy
+    labels:
+      - "traefik.frontend.rule=Host:need2fix.service.sci.tu.ac.th;PathPrefix:/"
+      - traefik.backend=web_needtofix
+      - traefik.port=80
+      - traefix.weight=5
+      - traefik.docker.network:proxy
     depends_on:
       - db_needtofix
 
   nginx_needtofix:
       container_name: nginx_needtofix
-      image: nginx:latest
-      ports:
-        - "80:80"
+      image: nginx:alpine
+#     ports:
+#       - "8081:80"
       volumes:
-        - ./nginx/:/etc/nginx/conf.d/
-        - /var/www/need/static/:/var/www/need/static/
-        - /var/www/need/media/:/var/www/need/media/
+         - ./need2fix:/usr/share/nginx/html/
+#        - ./nginx/:/etc/nginx/conf.d/
+#        - /var/www/static/:/var/www/need/static/
+#        - /var/www/need/media/:/var/www/need/media/
+      volumes_from:
+        - web_needtofix
+      labels:
+        - traefik.enable=true
+        - traefik.backend=nginx_needtofix
+        - traefik.frontend.passHostHeader=true
+#        - "traefik.frontend.rule=PathPrefixStrip:/need2fix"
+        - "traefik.frontend.rule=Host:need2fix.service.sci.tu.ac.th;PathPrefix:/static/"
+        - traefik.docker.network:proxy
+        - traefik.port=80
+#        - traefik.port=443
+        - traefik.weight=5
+      networks:
+        - internal
+        - proxy
       depends_on:
         - web_needtofix
