@@ -38,7 +38,7 @@ services:
       - traefik.backend=web_needtofix
       - traefik.port=80
       - traefix.weight=5
-      - traefik.docker.network:proxy
+      - traefik.docker.network=proxy
     depends_on:
       - db_needtofix
 
@@ -59,8 +59,8 @@ services:
         - traefik.backend=nginx_needtofix
         - traefik.frontend.passHostHeader=true
 #        - "traefik.frontend.rule=PathPrefixStrip:/need2fix"
-        - "traefik.frontend.rule=Host:need2fix.service.sci.tu.ac.th;PathPrefix:/static/"
-        - traefik.docker.network:proxy
+        - "traefik.frontend.rule=Host:need2fix.service.sci.tu.ac.th;PathPrefix:/static/,/media/"
+        - traefik.docker.network=proxy
         - traefik.port=80
 #        - traefik.port=443
         - traefik.weight=5
