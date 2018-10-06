@@ -3,6 +3,8 @@ version: '2'
 networks:
   proxy:
     external: true
+  db_service:
+    external: true
   internal:
     external: false
 
@@ -16,6 +18,7 @@ services:
       - traefik.enable=false
     networks:
       - internal
+      - db_service
     volumes:
       - /home/kubelab/data/need2fix_data:/var/lib/postgresql/data
 
