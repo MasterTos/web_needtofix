@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='task',
             name='contact',
-            field=models.EmailField(max_length=32),
+            field=models.EmailField(blank=True, max_length=32, null=True),
         ),
     ]
