@@ -43,7 +43,7 @@ class Task(models.Model):
     building = models.CharField(max_length=32)
     floor = models.CharField(max_length=32)
     room = models.CharField(max_length=32)
-    contact = models.EmailField(max_length=32)
+    contact = models.EmailField(max_length=32, default="example@mail.com")
     phone_contact = models.CharField(max_length=32, null=True, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)
     done_date = models.DateTimeField(null=True, blank=True)
