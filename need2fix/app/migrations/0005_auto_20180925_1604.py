@@ -12,6 +12,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='task',
+            name='contact',
+            field=models.EmailField(max_length=32),
+        ),
+        migrations.AlterField(
+            model_name='task',
             name='room',
             field=models.CharField(max_length=32),
         ),
